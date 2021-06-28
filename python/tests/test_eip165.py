@@ -3,7 +3,7 @@ import unittest
 import os
 import logging
 
-# local imports
+# external imports
 from chainlib.eth.unittest.ethtester import EthTesterCase
 from chainlib.eth.nonce import RPCNonceOracle
 from chainlib.eth.gas import OverrideGasOracle
@@ -12,7 +12,9 @@ from chainlib.eth.tx import (
         TxFactory,
         receipt,
         )
-from chainlib.eth.eip165 import EIP165
+
+# local imports
+from eth_interface import EIP165
 
 logging.basicConfig(level=logging.DEBUG)
 logg = logging.getLogger()

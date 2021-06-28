@@ -1,8 +1,6 @@
 # external imports
 from chainlib.eth.constant import ZERO_ADDRESS
-from chainlib.jsonrpc import (
-        jsonrpc_template,
-        )
+from chainlib.jsonrpc import JSONRPCRequest
 from hexathon import (
         add_0x,
         )
@@ -17,8 +15,9 @@ from chainlib.eth.tx import TxFactory
 
 class EIP165(TxFactory):
 
-    def supports_interface(self, contract_address, interface_sum, sender_address=ZERO_ADDRESS):
-        o = jsonrpc_template()
+    def supports_interface(self, contract_address, interface_sum, sender_address=ZERO_ADDRESS, id_generator=None):
+        j = JSONRPCRequest(id_generator)
+        o = j.template()
         o['method'] = 'eth_call'
         enc = ABIContractEncoder()
         enc.method('supportsInterface')
@@ -28,6 +27,7 @@ class EIP165(TxFactory):
         tx = self.template(sender_address, contract_address)
         tx = self.set_code(tx, data)
         o['params'].append(self.normalize(tx))
+        o = j.finalize(o)
         return o
 
 

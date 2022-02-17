@@ -19,14 +19,6 @@ before_script:
 test:
   image: registry.gitlab.com/grassrootseconomics/cic-base-images/ci-solc-python:latest
   script: 
-      # build abi
-      - 'echo "Running Solc Version: $(solc --version)"'
-      - cd solidity 
-      - solc --evm-version=byzantium GiftableToken.sol --abi | awk 'NR>3' > GiftableToken.abi.json
-      # build bin
-      - solc GiftableToken.sol --bin | awk 'NR>3' > GiftableToken.bin && 
-        truncate -s "$((`stat -t -c "%s" GiftableToken.bin`-1))" GiftableToken.bin
-      # install test dependencies
       - cd ../python 
       - export PYTHONPATH=.
       - pip install --extra-index-url https://pip.grassrootseconomics.net 

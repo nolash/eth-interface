@@ -19,7 +19,7 @@ before_script:
 test:
   image: registry.gitlab.com/grassrootseconomics/cic-base-images/ci-solc-python:latest
   script: 
-      - cd ../python 
+      - cd python 
       - export PYTHONPATH=.
       - pip install --extra-index-url https://pip.grassrootseconomics.net 
         --extra-index-url https://gitlab.com/api/v4/projects/27624814/packages/pypi/simple 

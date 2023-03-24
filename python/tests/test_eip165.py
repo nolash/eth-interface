@@ -14,7 +14,7 @@ from chainlib.eth.tx import (
         )
 
 # local imports
-from eth_interface.eip165 import EIP165
+from eth_interface import ERC165
 
 logging.basicConfig(level=logging.DEBUG)
 logg = logging.getLogger()
@@ -48,7 +48,7 @@ class TestSupports(EthTesterCase):
 
     def test_supports(self):
         gas_oracle = OverrideGasOracle(limit=100000, conn=self.conn)
-        c = EIP165(self.chain_spec, gas_oracle=gas_oracle)
+        c = ERC165(self.chain_spec, gas_oracle=gas_oracle)
         o = c.supports_interface(self.address, '0xdeadbeef', sender_address=self.accounts[0])
         r = self.conn.do(o)
         v = c.parse_supports_interface(r)

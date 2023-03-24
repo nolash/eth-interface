@@ -1,1 +1,1 @@
-from .eip165 import EIP165
+from .eip165 import ERC165

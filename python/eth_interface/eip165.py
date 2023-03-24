@@ -13,7 +13,7 @@ from chainlib.eth.contract import (
 from chainlib.eth.tx import TxFactory
 
 
-class EIP165(TxFactory):
+class ERC165(TxFactory):
 
     def supports_interface(self, contract_address, interface_sum, sender_address=ZERO_ADDRESS, id_generator=None):
         j = JSONRPCRequest(id_generator)

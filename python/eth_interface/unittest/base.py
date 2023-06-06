@@ -24,7 +24,8 @@ class TestERC165:
 
     def test_erc165_interfaces(self):
         c = ERC165(self.chain_spec)
-        for ifc in self.erc165_ifcs:
+        logg.info('will check interfaces: {}'.format(self.erc165_ifcs))
+        for ifc in self.erc165_ifcs + ['01ffc9a7']:
             logg.debug('checking ifc {}'.format(ifc))
             o = c.supports_interface(self.address, ifc, sender_address=self.accounts[0])
             r = self.rpc.do(o)

@@ -15,6 +15,7 @@ from chainlib.eth.tx import (
 
 # local imports
 from eth_interface import ERC165
+from eth_interface.unittest import TestERC165
 
 logging.basicConfig(level=logging.DEBUG)
 logg = logging.getLogger()
@@ -22,7 +23,7 @@ logg = logging.getLogger()
 script_dir = os.path.realpath(os.path.dirname(__file__))
 
 
-class TestSupports(EthTesterCase):
+class TestSupports(EthTesterCase, TestERC165):
 
     def setUp(self):
         super(TestSupports, self).setUp()
@@ -46,18 +47,18 @@ class TestSupports(EthTesterCase):
         self.address = r['contract_address']
 
 
-    def test_supports(self):
-        gas_oracle = OverrideGasOracle(limit=100000, conn=self.conn)
-        c = ERC165(self.chain_spec, gas_oracle=gas_oracle)
-        o = c.supports_interface(self.address, '0xdeadbeef', sender_address=self.accounts[0])
-        r = self.conn.do(o)
-        v = c.parse_supports_interface(r)
-        self.assertEqual(v, 1)
-        
-        o = c.supports_interface(self.address, '0xbeeffeed', sender_address=self.accounts[0])
-        r = self.conn.do(o)
-        v = c.parse_supports_interface(r)
-        self.assertEqual(v, 0)
+#    def test_supports(self):
+#        gas_oracle = OverrideGasOracle(limit=100000, conn=self.conn)
+#        c = ERC165(self.chain_spec, gas_oracle=gas_oracle)
+#        o = c.supports_interface(self.address, '0xdeadbeef', sender_address=self.accounts[0])
+#        r = self.conn.do(o)
+#        v = c.parse_supports_interface(r)
+#        self.assertEqual(v, 1)
+#        
+#        o = c.supports_interface(self.address, '0xbeeffeed', sender_address=self.accounts[0])
+#        r = self.conn.do(o)
+#        v = c.parse_supports_interface(r)
+#        self.assertEqual(v, 0)
 
 if __name__ == '__main__':
     unittest.main()

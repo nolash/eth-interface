@@ -17,7 +17,7 @@ contract InterfaceCheckSample {
 		interfaceN = uint32(interfaceID);
 
 		// EIP165 interface id
-		if (uint32(interfaceID) ==  0x01ffc9a7) {
+		if (uint32(interfaceID) == 0x01ffc9a7) {
 			return true;
 		}
 
